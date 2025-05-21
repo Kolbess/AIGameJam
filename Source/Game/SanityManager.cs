@@ -7,7 +7,7 @@ public class SanityManager : Script
 {
     [Serialize] public GameSettings gameSettings;
 
-    private float currentSanity;
+    public float currentSanity;
 
     private VisualEffectsManager visualEffectsManager;
     private SoundManager soundManager;

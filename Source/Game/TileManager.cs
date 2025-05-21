@@ -54,18 +54,45 @@ public class TileManager : Script
 
     public override void OnStart()
     {
-        for (int i = 0; i < TilesAhead + TilesBehind; i++)
+        if (_playerController == null)
+            return;
+
+        Vector3 playerPos = _playerController.Actor.Position;
+        Vector3 forward = _playerController.Actor.Transform.Forward;
+        _lastTileRotation = _playerController.Actor.Orientation;
+
+        // Snap to grid to align with tile system
+        Vector3 centerTile = SnapToGrid(playerPos, GameSettings.TileSize);
+        _lastTilePosition = centerTile;
+
+        // Generate tiles behind
+        for (int i = -TilesBehind; i <= TilesAhead; i++)
         {
-            GenerateNextTile(_lastTilePosition, PlayerController.Direction.Forward);
+            Vector3 tilePos = centerTile + forward * (i * GameSettings.TileSize);
+
+            if (!_tileDataMap.ContainsKey(tilePos))
+            {
+                Actor newTile = PrefabManager.SpawnPrefab(TilePrefab, tilePos, _lastTileRotation);
+                var data = new TileManager.TileData { TileActor = newTile };
+                _activeTiles.Enqueue(newTile);
+                _tileDataMap[tilePos] = data;
+            }
+
+            // Update last tile only if it's the farthest ahead
+            if (i == TilesAhead)
+            {
+                _lastTilePosition = tilePos;
+            }
         }
     }
+
 
     private void HandlePlayerStep()
     {
         DestroyOldestTile();
     }
 
-    public void GenerateNextTile(Vector3 playerPosition, PlayerController.Direction direction)
+    public void GenerateNextTile(Vector3 playerPosition, int direction)
     {
         if (TilePrefab == null)
         {
@@ -73,8 +100,10 @@ public class TileManager : Script
             return;
         }
 
-        Vector3 nextPosition = _lastTilePosition + Vector3.Transform(Vector3.Forward, _lastTileRotation) * GameSettings.TileSize;
-        Quaternion nextRotation = _lastTileRotation;
+        Vector3 forward = _playerController.Actor.Transform.Forward;
+        Vector3 nextPosition = _lastTilePosition + forward * GameSettings.TileSize;
+        Quaternion nextRotation = Quaternion.LookRotation(forward);
+
 
         // (Optional logic for forks goes here)
 

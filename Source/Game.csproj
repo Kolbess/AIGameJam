@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Debug|x64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -63,7 +63,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Debug|x64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -84,7 +84,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Debug|ARM64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -105,7 +105,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Development|x64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -126,7 +126,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Development|ARM64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -147,7 +147,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Release|x64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -168,7 +168,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Release|ARM64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -189,7 +189,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Debug|x64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -210,7 +210,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Debug|Win32' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -231,7 +231,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Debug|ARM64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -252,7 +252,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Development|x64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -273,7 +273,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Development|Win32' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -294,7 +294,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Development|ARM64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -315,7 +315,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Release|x64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -336,7 +336,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Release|Win32' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -357,13 +357,13 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Release|ARM64' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Source\Platforms\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="FlaxEngine.CSharp">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Binaries\Editor\Win64\Development\FlaxEngine.CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Flax\Flax_1.10\Binaries\Editor\Win64\Development\FlaxEngine.CSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -379,53 +379,54 @@
     <Compile Include="Game\PlayerController.cs" />
     <Compile Include="Game\SanityManager.cs" />
     <Compile Include="Game\SoundManager.cs" />
+    <Compile Include="Game\StartGame.cs" />
     <Compile Include="Game\TileManager.cs" />
     <Compile Include="Game\UIManager.cs" />
     <Compile Include="Game\VisualEffectsManager.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Debug|x64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\x64\Debug\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\x64\Debug\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Debug|ARM64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\ARM64\Debug\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\ARM64\Debug\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Development|x64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\x64\Development\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\x64\Development\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Development|ARM64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\ARM64\Development\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\ARM64\Development\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Release|x64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\x64\Release\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\x64\Release\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Editor.Windows.Release|ARM64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\ARM64\Release\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameEditorTarget\Windows\ARM64\Release\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Debug|x64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameTarget\Windows\x64\Debug\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameTarget\Windows\x64\Debug\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Debug|Win32' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameTarget\Windows\Win32\Debug\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameTarget\Windows\Win32\Debug\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Debug|ARM64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameTarget\Windows\ARM64\Debug\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameTarget\Windows\ARM64\Debug\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Development|x64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameTarget\Windows\x64\Development\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameTarget\Windows\x64\Development\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Development|Win32' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameTarget\Windows\Win32\Development\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameTarget\Windows\Win32\Development\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Development|ARM64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameTarget\Windows\ARM64\Development\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameTarget\Windows\ARM64\Development\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Release|x64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameTarget\Windows\x64\Release\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameTarget\Windows\x64\Release\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Release|Win32' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameTarget\Windows\Win32\Release\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameTarget\Windows\Win32\Release\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Game.Windows.Release|ARM64' " >
-    <Compile Visible="false" Include="C:\Users\podze\OneDrive\Dokumenty\Flax Projects\AIGameJam\Cache\Intermediate\GameTarget\Windows\ARM64\Release\Game\Game.Bindings.Gen.cs" />
+    <Compile Visible="false" Include="C:\Users\Mateusz Roszko\RiderProjects\AIGameJam\Cache\Intermediate\GameTarget\Windows\ARM64\Release\Game\Game.Bindings.Gen.cs" />
   </ItemGroup>
 </Project>

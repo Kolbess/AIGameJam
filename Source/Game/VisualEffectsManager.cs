@@ -11,21 +11,23 @@ public class VisualEffectsManager : Script
     [Serialize] private Script _cameraController;
 
     private SanityManager _sanityManager;
-    private GameSettings _gameSettings;
+    public GameSettings _gameSettings;
 
     private float _shakeDuration;
     private float _shakeMagnitude;
 
     public float MirageEffectDuration = 1.0f;
 
-    private void Start()
+    public override void OnStart()
     {
         _sanityManager = Actor.GetScript<SanityManager>();
-        _gameSettings = Actor.GetScript<GameSettings>();
+        //_gameSettings = Actor.GetScript<GameSettings>();
     }
 
     public void UpdateSanityEffects(float sanity)
     {
+        Debug.Log(sanity + "San");
+        Debug.Log(_gameSettings);
         float normalizedSanity = Mathf.Clamp(sanity / _gameSettings.maxSanity, 0f, 1f);
 
         float chromaticAberrationIntensity = Mathf.Lerp(

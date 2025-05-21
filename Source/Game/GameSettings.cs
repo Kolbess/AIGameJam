@@ -9,7 +9,7 @@ public class GameSettings : Script
     public float SanityDrainRate = 1.0f;
 
     [Tooltip("Max Sanity Amount.")]
-    public float maxSanity;
+    public float maxSanity = 100.0f;
 
     [Tooltip("Amount of sanity restored by collecting a Water Flask.")]
     public float WaterFlaskSanityRestore = 20.0f;

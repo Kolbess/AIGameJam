@@ -11,18 +11,18 @@ public class GameManager : Script
     private GameState currentGameState = GameState.Initializing;
     private int currentScore = 0;
 
-    private PlayerController playerController;
-    private SanityManager sanityManager;
-    private UIManager uiManager;
+    public PlayerController playerController;
+    [Serialize] private SanityManager sanityManager;
+    [Serialize] private UIManager uiManager;
 
     public event Action<EndReason> OnGameOver;
 
     public override void OnStart()
     {
         // Znajdź referencje do komponentów skryptowych
-        playerController = Actor.GetScript<PlayerController>();
-        if (playerController == null)
-            Debug.LogError("GameManager: PlayerController not found!");
+        //playerController = Actor.GetScript<PlayerController>();
+        //if (playerController == null)
+        //    Debug.LogError("GameManager: PlayerController not found!");
 
         sanityManager = Actor.GetScript<SanityManager>();
         if (sanityManager == null)
@@ -31,6 +31,8 @@ public class GameManager : Script
         uiManager = Actor.GetScript<UIManager>();
         if (uiManager == null)
             Debug.LogError("GameManager: UIManager not found!");
+
+        StartGame();
     }
 
     public override void OnEnable()

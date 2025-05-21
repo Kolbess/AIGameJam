@@ -62,6 +62,7 @@ public class CameraController : Script
         }
 
         _initialLocalPosition = Actor.Transform.Translation;
+        Debug.Log($"pos:{_initialLocalPosition}");
     }
 
     public override void OnDestroy()
@@ -73,33 +74,80 @@ public class CameraController : Script
     }
 
     public override void OnLateUpdate()
+{
+    if (PlayerActor == null)
+        return;
+
+    // Calculate desired position
+    var playerTransform = PlayerActor.Transform;
+    Vector3 right = Vector3.Transform(Vector3.Right, playerTransform.Orientation);
+    Vector3 up = Vector3.Transform(Vector3.Up, playerTransform.Orientation);
+    Vector3 forward = Vector3.Transform(Vector3.Forward, playerTransform.Orientation);
+
+    Vector3 desiredPosition =
+        playerTransform.Translation
+        + right * Offset.X
+        + up * Offset.Y
+        + forward * Offset.Z;
+
+    Vector3 smoothedPosition = Vector3.Lerp(Actor.Transform.Translation, desiredPosition, SmoothSpeed);
+
+    // Look at the player
+    Vector3 lookTarget = PlayerActor.Transform.Translation + Vector3.Up * 0.5f;
+    Quaternion baseOrientation = Quaternion.LookRotation((lookTarget - smoothedPosition).Normalized, Vector3.Up);
+
+    // Apply sanity distortion (rotation only)
+    Quaternion rotDistortion = Quaternion.Identity;
+    if (_sanityManager != null)
     {
-        if (PlayerActor == null)
-            return;
+        float sanityLevel = _sanityManager.currentSanity;
+        float distortionFactor = 1.0f - Mathf.Clamp((sanityLevel - LowSanityDistortionStart) / (1.0f - LowSanityDistortionStart), 0, 1);
+        float factor = distortionFactor * SanityEffectIntensity;
+        float time = Time.GameTime;
+        float speed = DistortionSpeed;
 
-        // Calculate desired position based on player's forward direction
-        var playerTransform = PlayerActor.Transform;
-        Vector3 desiredPosition = playerTransform.Translation + Offset * playerTransform.Orientation;
-        Vector3 smoothedPosition = Vector3.Lerp(Actor.Transform.Translation, desiredPosition, SmoothSpeed);
-        Actor.Transform = new Transform(smoothedPosition, Actor.Transform.Orientation);
+        var noiseRotX = new PerlinNoise(time * speed + 300f, 1.0f, 1.0f, 1);
+        var noiseRotY = new PerlinNoise(time * speed + 400f, 1.0f, 1.0f, 1);
+        var noiseRotZ = new PerlinNoise(time * speed + 500f, 1.0f, 1.0f, 1);
 
-        // Look at the player slightly above
-        Vector3 lookTarget = PlayerActor.Transform.Translation + Vector3.Up * 0.5f;
-        Actor.LookAt(lookTarget);
-
-        // Apply shake if active
-        if (_shakeDuration > 0)
-        {
-            Vector3 shakeOffset = RandomInsideUnitSphere() * _shakeMagnitude;
-            Actor.Transform = new Transform(_initialLocalPosition + shakeOffset, Actor.Transform.Orientation);
-            _shakeDuration -= Time.DeltaTime;
-        }
-        else
-        {
-            _shakeDuration = 0f;
-            // No shake offset applied; smooth follow already done above
-        }
+        rotDistortion = Quaternion.Euler(
+            Noise(0, noiseRotX) * MaxRotationDistortion * factor,
+            Noise(0, noiseRotY) * MaxRotationDistortion * factor,
+            Noise(0, noiseRotZ) * MaxRotationDistortion * factor
+        );
     }
+
+    // Final orientation
+    Quaternion finalOrientation = baseOrientation * rotDistortion;
+
+    // Camera shake (position only)
+    Vector3 shakeOffset = Vector3.Zero;
+    if (_shakeDuration > 0)
+    {
+        shakeOffset = RandomInsideUnitSphere() * _shakeMagnitude;
+        _shakeDuration -= Time.DeltaTime;
+    }
+    Vector3 posDistortion = Vector3.Zero;
+    if (_sanityManager != null)
+    {
+        float sanityLevel = _sanityManager.currentSanity;
+        float distortionFactor = 1.0f - Mathf.Clamp((sanityLevel - LowSanityDistortionStart) / (1.0f - LowSanityDistortionStart), 0, 1);
+        float factor = distortionFactor * SanityEffectIntensity;
+        float time = Time.GameTime;
+        float speed = DistortionSpeed;
+
+        var noiseX = new PerlinNoise(time * speed, 1.0f, 1.0f, 1);
+        var noiseY = new PerlinNoise(time * speed + 100f, 1.0f, 1.0f, 1);
+        var noiseZ = new PerlinNoise(time * speed + 200f, 1.0f, 1.0f, 1);
+
+        posDistortion = new Vector3(
+            Noise(0, noiseX) * MaxDistortionMagnitude,
+            Noise(0, noiseY) * MaxDistortionMagnitude,
+            Noise(0, noiseZ) * MaxDistortionMagnitude
+        ) * factor;
+    }
+    Actor.Transform = new Transform(smoothedPosition + posDistortion + shakeOffset, finalOrientation);
+}
 
     private static Vector3 RandomInsideUnitSphere()
     {
@@ -127,43 +175,9 @@ public class CameraController : Script
     ///
     public void ApplySanityCameraEffects(float sanityLevel)
     {
-        if (_visualEffectsManager != null)
-            _visualEffectsManager.UpdateSanityEffects(sanityLevel);
-
-        float distortionFactor = 1.0f - Mathf.Clamp((sanityLevel - LowSanityDistortionStart) / (1.0f - LowSanityDistortionStart), 0, 1);
-
-        float time = Time.GameTime;
-        float speed = DistortionSpeed;
-
-        // Create PerlinNoise instances for each axis
-        var noiseX = new PerlinNoise(time * speed, 1.0f, 1.0f, 1);
-        var noiseY = new PerlinNoise(time * speed + 100f, 1.0f, 1.0f, 1);
-        var noiseZ = new PerlinNoise(time * speed + 200f, 1.0f, 1.0f, 1);
-
-        Vector3 posDistortion = new Vector3(
-            Noise(0, noiseX) * MaxDistortionMagnitude,
-            Noise(0, noiseY) * MaxDistortionMagnitude,
-            Noise(0, noiseZ) * MaxDistortionMagnitude
-        ) * distortionFactor * SanityEffectIntensity;
-
-        // Rotation distortion
-        var noiseRotX = new PerlinNoise(time * speed + 300f, 1.0f, 1.0f, 1);
-        var noiseRotY = new PerlinNoise(time * speed + 400f, 1.0f, 1.0f, 1);
-        var noiseRotZ = new PerlinNoise(time * speed + 500f, 1.0f, 1.0f, 1);
-
-        float factor = distortionFactor * SanityEffectIntensity;
-
-        Quaternion rotDistortion = Quaternion.Euler(
-            Noise(0, noiseRotX) * MaxRotationDistortion * factor,
-            Noise(0, noiseRotY) * MaxRotationDistortion * factor,
-            Noise(0, noiseRotZ) * MaxRotationDistortion * factor
-        );
-
-        Actor.Transform = new Transform(
-            Actor.Transform.Translation + posDistortion,
-            Actor.Transform.Orientation * rotDistortion
-        );
+        _visualEffectsManager?.UpdateSanityEffects(sanityLevel);
     }
+
 
 
     /// <summary>
