@@ -1,0 +1,23 @@
+{
+	"ID": "111c42c54f9da0a6d01e9a9b80943a34",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6705,
+	"Data": [
+	{
+		"ID": "3919f5f444eb475fd1a5ecaf4cacd90a",
+		"TypeName": "FlaxEngine.StaticModel",
+		"Name": "Bone_Structures_Scatt_0520175000_texture",
+		"Model": "eb2d79db421c97965c8c93a6c6a624b3",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "d78d5e2145b45cc1aaab23ab8237f3e1",
+					"ShadowsMode": 3,
+					"Visible": true,
+					"ReceiveDecals": true
+				}
+			]
+		}
+	}
+]
+}

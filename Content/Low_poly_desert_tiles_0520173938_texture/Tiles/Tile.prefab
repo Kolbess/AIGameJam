@@ -1,0 +1,41 @@
+{
+	"ID": "3313d6ca4548390820783b9aeda27fae",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6705,
+	"Data": [
+	{
+		"ID": "d0d60e33454a3058bd49de93a1a73787",
+		"TypeName": "FlaxEngine.StaticModel",
+		"Name": "Tile",
+		"Layer": 2,
+		"Model": "95ec71c24e041892b1981b92abe1f7a5",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "00000000000000000000000000000000",
+					"ShadowsMode": 3,
+					"Visible": true,
+					"ReceiveDecals": true
+				}
+			]
+		}
+	},
+	{
+		"ID": "1b2681824f698431d2e46b96280847ce",
+		"TypeName": "FlaxEngine.BoxCollider",
+		"ParentID": "d0d60e33454a3058bd49de93a1a73787",
+		"Name": "BoxCollider",
+		"Layer": 2,
+		"Center": {
+			"X": -0.01650238037109375,
+			"Y": 0.6918821334838867,
+			"Z": -0.0045013427734375
+		},
+		"Size": {
+			"X": 200.34100341796875,
+			"Y": 10.720272064208984,
+			"Z": 200.27499389648438
+		}
+	}
+]
+}

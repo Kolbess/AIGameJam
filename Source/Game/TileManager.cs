@@ -1,4 +1,6 @@
-﻿namespace Game;
+﻿using System;
+
+namespace Game;
 
 using FlaxEngine;
 using System.Collections.Generic;
@@ -18,6 +20,20 @@ public class TileManager : Script
     private PlayerController _playerController;
     private VisualEffectsManager _visualEffectsManager;
     private ItemManager _itemManager;
+    private Vector3 _currentDirection = Vector3.Forward;
+    private RandomStream _random = new RandomStream();
+    private int _consecutiveTurnCount = 0;
+    private const int MaxConsecutiveTurns = 2;
+    private static readonly Vector3[] Directions = new[]
+    {
+        Vector3.Forward,
+        Vector3.Left,
+        Vector3.Backward,
+        Vector3.Right
+    };
+    private int _currentDirIndex = 0; // Start jako forward
+
+
 
     public class TileData
     {
@@ -56,16 +72,15 @@ public class TileManager : Script
     {
         if (_playerController == null)
             return;
-
+        _currentDirIndex = 0;
+        _currentDirection = Directions[_currentDirIndex];
         Vector3 playerPos = _playerController.Actor.Position;
         Vector3 forward = _playerController.Actor.Transform.Forward;
         _lastTileRotation = _playerController.Actor.Orientation;
 
-        // Snap to grid to align with tile system
         Vector3 centerTile = SnapToGrid(playerPos, GameSettings.TileSize);
         _lastTilePosition = centerTile;
 
-        // Generate tiles behind
         for (int i = -TilesBehind; i <= TilesAhead; i++)
         {
             Vector3 tilePos = centerTile + forward * (i * GameSettings.TileSize);
@@ -76,9 +91,21 @@ public class TileManager : Script
                 var data = new TileManager.TileData { TileActor = newTile };
                 _activeTiles.Enqueue(newTile);
                 _tileDataMap[tilePos] = data;
+
+                // Apply item spawn chance
+                if (_itemManager != null && _random.RandRange(0f, 1f) < GameSettings.ItemSpawnChance)
+                {
+                    _itemManager.SpawnRandomItem(tilePos);
+                    data.HasItem = true;
+                }
+
+                // Apply instability chance
+                if (i < 0)
+                {
+                    MarkTileUnstable(tilePos); // Will handle scheduling
+                }
             }
 
-            // Update last tile only if it's the farthest ahead
             if (i == TilesAhead)
             {
                 _lastTilePosition = tilePos;
@@ -87,53 +114,89 @@ public class TileManager : Script
     }
 
 
+
     private void HandlePlayerStep()
     {
         DestroyOldestTile();
     }
 
-    public void GenerateNextTile(Vector3 playerPosition, int direction)
+
+    public void GenerateNextTile()
+{
+    if (TilePrefab == null)
     {
-        if (TilePrefab == null)
-        {
-            Debug.LogError("TileManager: TilePrefab not assigned!");
-            return;
-        }
-
-        Vector3 forward = _playerController.Actor.Transform.Forward;
-        Vector3 nextPosition = _lastTilePosition + forward * GameSettings.TileSize;
-        Quaternion nextRotation = Quaternion.LookRotation(forward);
-
-
-        // (Optional logic for forks goes here)
-
-        if (_tileDataMap.ContainsKey(nextPosition))
-        {
-            Debug.LogWarning("TileManager: Tile already exists at " + nextPosition);
-            return;
-        }
-
-        Actor newTile = PrefabManager.SpawnPrefab(TilePrefab, nextPosition, nextRotation);
-        var data = new TileData { TileActor = newTile };
-
-        _activeTiles.Enqueue(newTile);
-        _tileDataMap[nextPosition] = data;
-
-        _lastTilePosition = nextPosition;
-        _lastTileRotation = nextRotation;
-
-        if (_itemManager != null && new RandomStream().RandRange(0, 1) < GameSettings.ItemSpawnChance)
-        {
-            _itemManager.SpawnRandomItem(nextPosition);
-            data.HasItem = true;
-        }
-
-        if (new RandomStream().RandRange(0, 1) < GameSettings.UnstableTileChance)
-        {
-            MarkTileUnstable(nextPosition);
-        }
+        Debug.Log("TileManager: TilePrefab not assigned!");
+        return;
     }
 
+    // Decide direction
+    Vector3 leftDir = Vector3.Transform(_currentDirection, Quaternion.Euler(0, -90, 0));
+    Vector3 rightDir = Vector3.Transform(_currentDirection, Quaternion.Euler(0, 90, 0));
+    Vector3 forwardDir = _currentDirection;
+
+    Vector3 forwardPos = SnapToGrid(_lastTilePosition + forwardDir * GameSettings.TileSize, GameSettings.TileSize);
+    Vector3 leftPos = SnapToGrid(_lastTilePosition + leftDir * GameSettings.TileSize, GameSettings.TileSize);
+    Vector3 rightPos = SnapToGrid(_lastTilePosition + rightDir * GameSettings.TileSize, GameSettings.TileSize);
+
+    // Path mostly goes forward (e.g. 80% of time)
+    float forwardChance = 0.8f;
+    List<(Vector3 dir, Vector3 pos, int turnType)> options = new();
+
+    // Always prefer forward if it's free
+    if (!_tileDataMap.ContainsKey(forwardPos))
+        options.Add((forwardDir, forwardPos, 0));
+
+    // Occasionally allow left/right if not occupied
+    if (_random.RandRange(0f, 1f) > forwardChance)
+    {
+        if (!_tileDataMap.ContainsKey(leftPos))
+            options.Add((leftDir, leftPos, 1));
+        if (!_tileDataMap.ContainsKey(rightPos))
+            options.Add((rightDir, rightPos, 2));
+    }
+
+    if (options.Count == 0)
+    {
+        Debug.LogWarning("TileManager: No available direction, forcing forward even if overlapping.");
+        options.Add((forwardDir, forwardPos, 0));
+    }
+
+    var selected = options[_random.RandRange(0, options.Count - 1)];
+    _currentDirection = selected.dir;
+    Vector3 nextPosition = selected.pos;
+    Quaternion nextRotation = Quaternion.LookRotation(_currentDirection);
+
+    if (_tileDataMap.ContainsKey(nextPosition))
+    {
+        Debug.Log("TileManager: Tile already exists at " + nextPosition);
+        return;
+    }
+
+    // Spawn tile
+    Actor newTile = PrefabManager.SpawnPrefab(TilePrefab, nextPosition, nextRotation);
+    var data = new TileData { TileActor = newTile };
+
+    _activeTiles.Enqueue(newTile);
+    _tileDataMap[nextPosition] = data;
+
+    _lastTilePosition = nextPosition;
+    _lastTileRotation = nextRotation;
+
+    // Spawn item
+    if (_itemManager != null && _random.RandRange(0f, 1f) < GameSettings.ItemSpawnChance)
+    {
+        _itemManager.SpawnRandomItem(nextPosition);
+        data.HasItem = true;
+    }
+
+    // Mark unstable
+    if (_random.RandRange(0f, 1f) < GameSettings.UnstableTileChance)
+    {
+        Debug.Log("Unstable Tile to mark at " + nextPosition);
+        MarkTileUnstable(nextPosition);
+    }
+}
+    
     public void DestroyOldestTile()
     {
         if (_activeTiles.Count <= TilesBehind)
@@ -169,18 +232,28 @@ public class TileManager : Script
         {
             tileData.IsUnstable = true;
             _visualEffectsManager?.TriggerTileInstabilityEffect(position);
-            _ = ScheduleTileDestruction(position, GameSettings.TileLifespan);
+            Debug.Log("Scheduling destruction");
+            ScheduleTileDestruction(position, GameSettings.TileLifespan);
         }
     }
     
-    private async System.Threading.Tasks.Task ScheduleTileDestruction(Vector3 position, float delay)
+    private async System.Threading.Tasks.Task ScheduleTileDestruction(Vector3 position, float delay, bool forceEvenIfStable = false)
     {
         await System.Threading.Tasks.Task.Delay((int)(delay * 1000f)); // milliseconds
 
-        // Ensure this runs on main thread
         Scripting.InvokeOnUpdate(() =>
         {
-            DestroyUnstableTile(position);
+            var tileData = GetTileData(position);
+            if (tileData != null)
+            {
+                if (tileData.IsUnstable || forceEvenIfStable)
+                {
+                    if (tileData.TileActor)
+                        Destroy(tileData.TileActor);
+
+                    _tileDataMap.Remove(position);
+                }
+            }
         });
     }
 

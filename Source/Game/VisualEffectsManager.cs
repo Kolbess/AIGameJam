@@ -5,10 +5,10 @@ namespace Game;
 
 public class VisualEffectsManager : Script
 {
-    [Serialize] private MaterialInstance _mirageEffectMaterial;
-    [Serialize] private Camera _camera;
-    [Serialize] private Prefab _unstableTileEffectPrefab;
-    [Serialize] private Script _cameraController;
+    [Serialize] public MaterialInstance _mirageEffectMaterial;
+    [Serialize] public Camera _camera;
+    [Serialize] public Prefab _unstableTileEffectPrefab;
+    [Serialize] public Script _cameraController;
 
     private SanityManager _sanityManager;
     public GameSettings _gameSettings;

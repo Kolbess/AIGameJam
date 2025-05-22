@@ -1,0 +1,37 @@
+{
+	"ID": "4d93e36346bb78b5e41d63aafdf46a2c",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6705,
+	"Data": [
+	{
+		"ID": "2d77f8c24056c4f85bc440b91da2c5e3",
+		"TypeName": "FlaxEngine.StaticModel",
+		"Name": "Fake Pickup",
+		"Transform": {
+			"Scale": {
+				"X": 0.20000000298023224,
+				"Y": 0.20000000298023224,
+				"Z": 0.20000000298023224
+			}
+		},
+		"Model": "8079bd5d48d5d57e884785b2181cadac",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "00000000000000000000000000000000",
+					"ShadowsMode": 3,
+					"Visible": true,
+					"ReceiveDecals": true
+				}
+			]
+		}
+	},
+	{
+		"ID": "b20cea114863cbf535f070a29fbf00b5",
+		"TypeName": "FlaxEngine.MeshCollider",
+		"ParentID": "2d77f8c24056c4f85bc440b91da2c5e3",
+		"Name": "MeshCollider",
+		"IsTrigger": true
+	}
+]
+}

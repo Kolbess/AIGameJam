@@ -18,13 +18,13 @@ public class ItemTrigger : Script
     public override void OnEnable()
     {
         // Register for event
-        Actor.As<Collider>().TriggerEnter += OnTriggerEnter;
+        Actor.GetChild<Collider>().TriggerEnter += OnTriggerEnter;
     }
 
     public override void OnDisable()
     {
         // Unregister for event
-        Actor.As<Collider>().TriggerEnter -= OnTriggerEnter;
+        Actor.GetChild<Collider>().TriggerEnter -= OnTriggerEnter;
     }
 
     void OnTriggerEnter(PhysicsColliderActor collider)
@@ -35,6 +35,11 @@ public class ItemTrigger : Script
         if (collider)
         {
             if (collider.As<Actor>().HasTag("Player"))
+            {
+                collected = true;
+                itemManager?.OnItemCollected(itemType, Actor);
+            }
+            else if (collider.GetChild<Actor>().HasTag("Player"))
             {
                 collected = true;
                 itemManager?.OnItemCollected(itemType, Actor);

@@ -1,0 +1,37 @@
+{
+	"ID": "ead7977c4092355f49f3cbaa203393db",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6705,
+	"Data": [
+	{
+		"ID": "5bcc442e4424690aaa43569902862e69",
+		"TypeName": "FlaxEngine.StaticModel",
+		"Name": "Glowing Memo",
+		"Transform": {
+			"Scale": {
+				"X": 0.20000000298023224,
+				"Y": 0.20000000298023224,
+				"Z": 0.20000000298023224
+			}
+		},
+		"Model": "be30c8cb4f790bceb1e281bd31a7555a",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "00000000000000000000000000000000",
+					"ShadowsMode": 3,
+					"Visible": true,
+					"ReceiveDecals": true
+				}
+			]
+		}
+	},
+	{
+		"ID": "28f354d049f8e09f9e6a92841e9f6097",
+		"TypeName": "FlaxEngine.MeshCollider",
+		"ParentID": "5bcc442e4424690aaa43569902862e69",
+		"Name": "MeshCollider",
+		"IsTrigger": true
+	}
+]
+}

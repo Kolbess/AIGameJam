@@ -107,7 +107,7 @@ namespace Game
                 Actor.Position = new Vector3(_targetPosition.X, GroundY, _targetPosition.Z);
 
                 OnStepTaken?.Invoke();
-                _tileManager?.GenerateNextTile(Actor.Position, 0);
+                _tileManager?.GenerateNextTile();
             }
             else
             {

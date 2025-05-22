@@ -20,9 +20,10 @@ public class ItemManager : Script
 
     private SanityManager sanityManager;
     private VisualEffectsManager visualEffectsManager;
-    private PlayerController playerController;
+    [Serialize] public PlayerController playerController;
 
     private Dictionary<Actor, ItemType> activeItems = new Dictionary<Actor, ItemType>();
+    private RandomStream _rng = new RandomStream((int)Time.UnscaledGameTime * 1000);
 
     public override void OnStart()
     {
@@ -33,10 +34,6 @@ public class ItemManager : Script
         visualEffectsManager = Actor?.GetScript<VisualEffectsManager>();
         if (visualEffectsManager == null)
             Debug.LogError("ItemManager: VisualEffectsManager not found!");
-
-        playerController = Actor?.GetScript<PlayerController>();
-        if (playerController == null)
-            Debug.LogError("ItemManager: PlayerController not found!");
 
         if (gameSettings == null)
             Debug.LogError("ItemManager: GameSettings not assigned!");
@@ -62,7 +59,7 @@ public class ItemManager : Script
             return;
         }
 
-        float randomValue = new RandomStream().RandRange(0f, totalWeight);
+        float randomValue = _rng.RandRange(0f, totalWeight);
         ItemPrefab chosenItem = null;
         float cumulativeWeight = 0f;
 
@@ -78,10 +75,11 @@ public class ItemManager : Script
 
         if (chosenItem != null && chosenItem.prefab != null)
         {
-            Vector3 spawnPosition = position + Vector3.Up * 0.1f;
+            Vector3 spawnPosition = position + Vector3.Up * playerController.GroundY;
             Actor spawnedActor = PrefabManager.SpawnPrefab(chosenItem.prefab, spawnPosition, Quaternion.Identity);
-            
+
             Collider collider = spawnedActor.GetChild<Collider>();
+            spawnedActor.Scale = new Float3(0.4f);
             if (collider == null)
             {
                 var sphereCollider = spawnedActor.AddChild<SphereCollider>();
@@ -101,6 +99,8 @@ public class ItemManager : Script
             itemTrigger.Initialize(this, chosenItem.type);
 
             activeItems.Add(spawnedActor, chosenItem.type);
+
+            Debug.Log($"[ItemManager] Spawned item: {chosenItem.type}");
         }
         else
         {

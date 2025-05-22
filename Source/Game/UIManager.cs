@@ -5,12 +5,16 @@ namespace Game;
 
 public class UIManager : Script
 {
-    [Header("UI Elements")]
-    public Slider sanityMeterSlider;
-    public Label scoreText;
+    [Header("UI Elements")] 
+    public UIControl sanityMeterControl;
+    private Slider sanityMeterSlider;
+    public UIControl scoreTextControl;
+    private Label scoreText;
     public Actor gameOverScreen; // Actor z UI, który pokazujemy/ukrywamy
-    public Label finalScoreText;
-    public Button restartButton;
+    public UIControl finalScoreTextControl;
+    private Label finalScoreText;
+    public UIControl restartButtonControl;
+    private Button restartButton;
 
     public SanityManager sanityManager;  // Zakładam, że są też Flaxowe skrypty
     public GameManager gameManager;
@@ -27,12 +31,24 @@ public class UIManager : Script
         if (gameOverScreen != null)
             gameOverScreen.IsActive = false;
 
-        if (restartButton != null)
-            restartButton.Clicked += OnRestartButtonClick;
-
         // Subskrypcje eventów
         if (sanityManager != null)
             sanityManager.OnSanityChanged += UpdateSanityMeter;
+        
+        if (sanityMeterControl != null)
+            sanityMeterSlider = sanityMeterControl.Get<Slider>();
+
+        if (scoreTextControl != null)
+            scoreText = scoreTextControl.Get<Label>();
+
+        if (finalScoreTextControl != null)
+            finalScoreText = finalScoreTextControl.Get<Label>();
+
+        if (restartButtonControl != null)
+            restartButton = restartButtonControl.Get<Button>();
+        
+        if (restartButton != null)
+            restartButton.Clicked += OnRestartButtonClick;
 
         if (gameManager != null)
             gameManager.OnGameOver += ShowGameOverScreen;
@@ -99,6 +115,7 @@ public class UIManager : Script
             sanityMeterSlider.Visible = true;
         if (scoreText != null)
             scoreText.Visible = true;
+        Debug.Log("Hidden Game Over");
     }
 
     private void OnRestartButtonClick()

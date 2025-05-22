@@ -30,6 +30,10 @@ public class CameraController : Script
     [EditorOrder(7), Tooltip("Speed of distortion changes")]
     public float DistortionSpeed = 1.0f;
 
+    [EditorOrder(8), Tooltip("Reference to the Sky Light actor.")]
+    public SkyLight SkyLight;
+    private Color _baseSkyColor = Color.FromHex("FFD8A8FF"); // pastelowy pomarańczowy
+
     // Camera shake params
     private float _shakeDuration = 0f;
     private float _shakeMagnitude = 0f;
@@ -176,7 +180,15 @@ public class CameraController : Script
     public void ApplySanityCameraEffects(float sanityLevel)
     {
         _visualEffectsManager?.UpdateSanityEffects(sanityLevel);
+        Debug.Log("sanity Level: " + sanityLevel);
+        if (SkyLight != null)
+        {
+            // Przejście od ciepłego do zimnego w zależności od sanity
+            Color targetColor = Color.Lerp(_baseSkyColor, Color.DarkBlue, 1.0f - sanityLevel);
+            SkyLight.Color = targetColor;
+        }
     }
+
 
 
 

@@ -1,0 +1,23 @@
+{
+	"ID": "27881bc046c9a3e75c7df499a17d94db",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6705,
+	"Data": [
+	{
+		"ID": "8b384b9846829b1c4d01989828e7bec5",
+		"TypeName": "FlaxEngine.StaticModel",
+		"Name": "Ancient_Ruins_Weather_0520175436_texture",
+		"Model": "3165419646eab3baa68e11820118dff5",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "56075c88454cafa94a6b86a3a761fec2",
+					"ShadowsMode": 3,
+					"Visible": true,
+					"ReceiveDecals": true
+				}
+			]
+		}
+	}
+]
+}

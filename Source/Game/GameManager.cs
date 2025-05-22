@@ -14,6 +14,7 @@ public class GameManager : Script
     public PlayerController playerController;
     [Serialize] private SanityManager sanityManager;
     [Serialize] private UIManager uiManager;
+    public SceneReference GameScene;
 
     public event Action<EndReason> OnGameOver;
 
@@ -70,16 +71,22 @@ public class GameManager : Script
             Debug.LogWarning("GameManager: StartGame called while game is already playing.");
             return;
         }
-
+        if (currentGameState == GameState.GameOver)
+        {
+            Level.UnloadAllScenesAsync(); // Unload current scene
+            Level.LoadSceneAsync(GameScene); // Load it again
+        }
         currentScore = 0;
         currentGameState = GameState.Playing;
+        //Level.LoadScene(GameScene);
 
         if (uiManager != null)
         {
             uiManager.UpdateScoreDisplay(currentScore);
+            
             uiManager.HideGameOverScreen();
         }
-
+        
         Debug.Log("Game Started!");
     }
 
